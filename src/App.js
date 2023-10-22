@@ -51,7 +51,7 @@ const App = () => {
   //   this.setState({ users: res.data, loading: false });
   // }
   // Search User
-  const searchUsers = async text => {
+  const searchUsers = async (text) => {
     setLoding(true);
     const res = await axios.get(
       `https://api.github.com/search/users?q=${text}&clinet_id=${REACT_APP_GITHUB_CLIENT_ID}&client_secret=${REACT_APP_GITHUB_CLIENT_SECRET}`
@@ -85,7 +85,7 @@ const App = () => {
 
   // Get Single Github Users
 
-  const getUser = async username => {
+  const getUser = async (username) => {
     setLoding(true);
     const res = await axios.get(
       `https://api.github.com/users/${username}?&clinet_id=${REACT_APP_GITHUB_CLIENT_ID}&client_secret=${REACT_APP_GITHUB_CLIENT_SECRET}`
@@ -95,7 +95,7 @@ const App = () => {
   };
 
   // Get User repos
-  const getUserRepos = async username => {
+  const getUserRepos = async (username) => {
     setLoding(true);
     const res = await axios.get(
       `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&clinet_id=${REACT_APP_GITHUB_CLIENT_ID}&client_secret=${REACT_APP_GITHUB_CLIENT_SECRET}`
@@ -114,7 +114,22 @@ const App = () => {
             <Route
               exact
               path="/"
-              render={props => (
+              render={(props) => (
+                <Fragment>
+                  <Search
+                    searchUsers={searchUsers}
+                    clearUsers={clearUsers}
+                    showClear={users.length > 0 ? true : false}
+                    setAlert={showAlert}
+                  />
+                  <Users loading={loading} users={users} />
+                </Fragment>
+              )}
+            />
+            <Route
+              exact
+              path="/git_hub_finder23"
+              render={(props) => (
                 <Fragment>
                   <Search
                     searchUsers={searchUsers}
@@ -130,7 +145,7 @@ const App = () => {
             <Route
               exact
               path="/SingleUser/:login"
-              render={props => (
+              render={(props) => (
                 <SingleUser
                   {...props}
                   getUser={getUser}
