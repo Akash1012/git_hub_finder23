@@ -4,12 +4,13 @@ import PropTypes from "prop-types";
 const ReposItem = (props) => {
   const { repo } = props;
   const openInNewTab = (repo) => {
-    window.open(repo);
+    console.log("akash", repo);
+    window.open(repo.html_url);
   };
   return (
     <div className="card">
       <h3>
-        <a href={() => openInNewTab(repo)}>{repo.name}</a>
+        <a onClick={() => openInNewTab(repo)}>{repo.name}</a>
       </h3>
     </div>
   );

@@ -12,6 +12,7 @@ const SingleUser = (props) => {
   }, []);
 
   const vistPage = (url) => {
+    console.log("url", url);
     window.open(url);
   };
   const {
