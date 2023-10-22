@@ -126,6 +126,7 @@ const App = () => {
                 </Fragment>
               )}
             />
+            {/* why ? fix for github deploymemnt only  */}
             <Route
               exact
               path="/git_hub_finder23"
@@ -141,7 +142,23 @@ const App = () => {
                 </Fragment>
               )}
             />
+            <Route exact path="/git_hub_finder23/about" component={About} />
             <Route exact path="/about" component={About} />
+
+            <Route
+              exact
+              path="/git_hub_finder23/SingleUser/:login"
+              render={(props) => (
+                <SingleUser
+                  {...props}
+                  getUser={getUser}
+                  user={singleUser}
+                  getUserRepos={getUserRepos}
+                  repos={repos}
+                  loading={loading}
+                />
+              )}
+            />
             <Route
               exact
               path="/SingleUser/:login"
